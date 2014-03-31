@@ -21,6 +21,7 @@ define perl::module (
   $url                 = '',
   $exec_path           = '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin',
   $exec_environment    = [],
+  $config_args         = undef,
   $exec_timeout        = '600',
 
   $ensure              = 'present'
@@ -41,8 +42,12 @@ define perl::module (
     default => $url,
   }
 
+  $cfg_args = $config_args ? {
+    undef   => '',
+    default => " --configure-args='${config_args}'",
+  }
   $cpan_command = $ensure ? {
-    present => "cpanm ${install_name}",
+    present => "cpanm ${cfg_args} ${install_name}",
     absent  => "pm-uninstall -f ${name}",
   }
 
