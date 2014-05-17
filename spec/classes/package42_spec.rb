@@ -1,4 +1,4 @@
-require "#{File.join(File.dirname(__FILE__),'..','spec_helper.rb')}"
+require 'spec_helper'
 
 describe 'perl' do
 
@@ -17,7 +17,7 @@ describe 'perl' do
 
   describe 'Test decommissioning - absent' do
     let(:params) { {:absent => true } }
-    it 'should remove Package[perl]' do should contain_package('perl').with_ensure('absent') end 
+    it 'should remove Package[perl]' do should contain_package('perl').with_ensure('absent') end
   end
 
   describe 'Test noops mode' do
